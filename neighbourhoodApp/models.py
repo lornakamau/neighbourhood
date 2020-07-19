@@ -2,10 +2,17 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
 class Neighbourhood(models.Model):
     name = models.CharField(max_length = 80)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    occupants = models.ManyToManyField(Profile, related_name="occupant")
+    admin = models.ForeignKey(Admin, on_delete=models.CASCADE)
+    occupants = models.ManyToManyField(Occupant, related_name="occupant")
 
     def __str__(self):
         return self.name
@@ -15,3 +22,5 @@ class Neighbourhood(models.Model):
 
     def delete_image(self):
         self.delete()
+
+    
