@@ -59,7 +59,13 @@ class Amenity(models.Model):
     class Meta:
         verbose_name_plural = "Amenities"
 
+class Post(models.Model):
+    message = models.TextField()
+    post_date = models.DateTimeField(auto_now_add=True, null = True)
+    occupant = models.ForeignKey(Occupant, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.message
 
 
 
