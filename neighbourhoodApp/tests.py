@@ -31,3 +31,6 @@ class OccupantTestClass(TestCase):
     def test_instance(self):
         self.assertTrue(isinstance(self.lorna, User))
         self.assertTrue(isinstance(self.occupant, Occupant))
+
+class NeighbourhoodTestClass(TestCase):
+    
