@@ -23,7 +23,7 @@ class Neighbourhood(models.Model):
     def delete_image(self):
         self.delete()
 
-class Profile(models.Model):
+class Occupant(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     email = models.EmailField()
     profile_pic = CloudinaryField('Profile Picture')
@@ -36,6 +36,15 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete() 
+
+class Business(models.Model):
+    name = models.CharField(max_length = 80)
+    category = models.CharField(max_length = 30)
+    location = models.CharField(max_length = 300)
+
+    def __str__(self):
+        return self.name
+
 
 
 
