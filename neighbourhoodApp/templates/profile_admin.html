@@ -1,0 +1,39 @@
+{% load bootstrap3 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{title}}</title>
+    {{else}}
+    <title>MyNeighbourhood</title>
+    {% endif %}
+    {% block styles %}
+    {% bootstrap_css %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico'%}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    <div class="box">
+        <div class="text-center">
+            <div class="title">Create a profile to start using MyNeighbourhood</div>
+            <hr>
+            <div class="guide">Please create an admin profile</div>
+        </div>
+        <form action="{%url 'create_profile_admin'%}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-dark " value="Create Admin Profile">
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    <script src=" {% static 'js/home.js' %}"></script>
+</body>
+
+</html>
