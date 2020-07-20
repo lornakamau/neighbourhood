@@ -106,7 +106,39 @@ def my_admin_profile(request):
     return render(request, 'my-admin-profile.html', {"profile": admin_profile, "title": title, "hood": my_hood, "map_page":map_page})
 
 
+@login_required(login_url='/accounts/login/')
+def add_resident(request):
+    current_user = request.user
+    try:
+        admin_profile = Admin_Profile.objects.get(this_user = current_user)
+    except Admin_Profile.DoesNotExist:
+        raise Http404()
 
+    try:
+        my_hood = Neighbourhood.objects.get(admin = admin_profile)
+    except Neighbourhood.DoesNotExist:
+        raise Http404()
+
+    if request.method == 'POST':
+        form = AddResidentForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+            this_resident =User.objects.create_user(username, email, password)
+            resident_profile = Resident_Profile(full_name=name, this_user=this_resident, username=username, hood=my_hood)
+            resident_profile.save()
+            my_hood.occupants_count = len(Resident_Profile.objects.filter(hood = my_hood))
+            send_signup_email_resident(name, username, password,admin_profile.full_name, my_hood.hood_name, email)
+            
+        return redirect(my_admin_profile)
+
+    else:
+        form = AddResidentForm()
+      
+    title = "Add resident"
+    return render(request, 'add-resident.html', {"form": form, "title": title})
 
 
 
