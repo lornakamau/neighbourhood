@@ -3,6 +3,8 @@ import random
 import string
 from django.shortcuts import render, redirect
 from .models import Neighbourhood, Admin, Occupant, Business, Amenity, Post
+from django.contrib.auth.decorators import login_required
+from .forms import AdminProfileForm, NeighbourhoodForm, AddResidentForm
 
 def home(request):
     return render(request, 'home.html')

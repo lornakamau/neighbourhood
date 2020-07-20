@@ -5,7 +5,8 @@ from mapbox_location_field.models import LocationField, AddressAutoHiddenField
 
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-
+    profile_pic = CloudinaryField('Profile Picture')
+    
     def __str__(self):
         return self.user.username
 
