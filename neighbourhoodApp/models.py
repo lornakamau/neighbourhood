@@ -24,8 +24,7 @@ class Neighbourhood(models.Model):
     address = AddressAutoHiddenField(blank=True)
 
     def __str__(self):
-        return self.name
- 
+        return self.name 
 
 class Business(models.Model):
     name = models.CharField(max_length = 80)
