@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{% block content %}
+{{block.super}}
+
+<div class="container">
+    <br>
+    <div class="row under-nav">
+        <div class="col-xs-12 col-sm-6 col-md-3 prof-pic">
+            <img class="img-thumbnail" src="{{profile.profile_photo.url}}" alt="{{profile.account_holder.username}}">
+        </div>
+        <div class="col-xs-0 col-sm-0 col-md-1"></div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h2>{{profile.this_user.username}}</h2>
+            <h6>Name: {{profile.full_name}}</h6>
+            <p><span class="bolden">Bio: </span>{{profile.bio}}</p>
+            {% if profile.this_user.email %} 
+            <p><span class="bolden"><span class="fa fa-envelope"></span></span> {{profile.this_user.email}}</p>  
+            {% endif %}         
+            <p class="text-muted">Joined on {{profile.created}}</p>
+            <hr>
+            <button class="btn btn-secondary" id="account_settings">Account Settings <span class="fa fa-cog"></span></button>            
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <br>
+            <h6 class="bolden">Account options</h6>
+            <ul>
+                <li><p><a href="{%url 'add-resident'%}">Add resident</a></h5></p>
+                <li><p><a href="{%url 'update-hood'%}">Update hood</a></h5></p>
+                <li><p><a href="#">Delete profile</a></h5></p>                 
+                <li><p><a href="/logout">Log out</a></h5></p>            
+            </ul>
+            <!-- Modal -->
+            
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="container">    
+    <div class="row">
+        <div class="col-12">
+            <h2 class="bolden">My Hood | {{hood.hood_name}}</h2>  
+            <hr>
+            {{ map_page|safe }}      
+        </div>        
+    </div>
+</div>
+
+{% endblock %}
