@@ -2,8 +2,12 @@ import folium
 import random
 import string
 from django.shortcuts import render, redirect
+from django.http  import HttpResponse,Http404,HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 from .models import Neighbourhood, Admin, Occupant, Business, Amenity, Post
 from django.contrib.auth.decorators import login_required
+from .email import send_signup_email_admin, send_signup_email_resident
 from .forms import AdminProfileForm, NeighbourhoodForm, AddResidentForm
 
 def home(request):
@@ -186,5 +190,5 @@ def delete_hood(request):
     admin_profile.delete()
     current_user.delete()
 
-    return redirect(index)      
+    return redirect(home)      
     
