@@ -32,7 +32,8 @@ def create_profile_admin(request):
         form = AdminProfileForm()
       
     title = "Admin profile "
-    return render(request, 'profile_admin.html', {"form": form, "title": title})
+    return render(request, 'create-profile-admin.html', {"form": form, "title": title})
+
 
 @login_required(login_url='/accounts/login/')
 def create_hood(request):
@@ -63,4 +64,54 @@ def create_hood(request):
         form = NeighbourhoodForm()
       
     title = "Create Hood"
-    return render(request, 'create_hood.html', {"form": form, "title": title})
+    return render(request, 'create-hood.html', {"form": form, "title": title})
+
+
+@login_required(login_url='/accounts/login/')
+def my_admin_profile(request):
+    current_user = request.user
+    try:
+        admin_profile = Admin_Profile.objects.get(this_user = current_user)
+    except Admin_Profile.DoesNotExist:
+        raise Http404()
+
+    my_hood =None
+    try:
+        my_hood = Neighbourhood.objects.get(admin = admin_profile)
+    except Neighbourhood.DoesNotExist:
+        raise Http404()
+
+    if my_hood:
+        longitude = my_hood.location[0]
+        latitude = my_hood.location[1]
+    
+
+    m = folium.Map(location=[latitude, longitude], zoom_start=15)
+    folium.Marker([latitude,longitude],
+                    popup='<h5>My neighbourhood.</h5>',
+                    tooltip=f'{my_hood.hood_name}',
+                    icon=folium.Icon(icon='glyphicon-home', color='blue')).add_to(m),
+    folium.CircleMarker(
+        location=[latitude, longitude],
+        radius=50,
+        popup=f'{my_hood.hood_name}',
+        color='#428bca',
+        fill=True,
+        fill_color='#428bca'
+    ).add_to(m),
+
+    map_page = m._repr_html_()    
+      
+    title = admin_profile.this_user.username
+    return render(request, 'my-admin-profile.html', {"profile": admin_profile, "title": title, "hood": my_hood, "map_page":map_page})
+
+
+
+
+
+
+
+
+
+  
+    
