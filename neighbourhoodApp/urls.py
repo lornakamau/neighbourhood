@@ -21,7 +21,6 @@ urlpatterns=[
     url(r'^occupants-list/$',views.residents_list,name = 'occupants-list'),
     url(r'^delete-occupant/(\d+)',views.delete_resident,name = 'delete-occupant'),
     url(r'^changeprofilephoto/$',views.change_profile_photo,name = 'change-profile-photo'),
-    url(r'^search/$',views.search_business,name = 'search-business'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

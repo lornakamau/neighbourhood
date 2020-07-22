@@ -509,38 +509,3 @@ def delete_resident(request, res_id):
     u_account.delete()   
     
     return redirect(residents_list)
-
-
-@login_required(login_url='/accounts/login/')
-def search_business(request):
-    current_user = request.user
-    admin = None
-    try:
-        admin = Admin.objects.get(user = current_user)
-    except Admin.DoesNotExist:
-        pass
-
-    occupant = None
-    try:
-        occupant = Occupant.objects.get(user = current_user)
-    except Occupant.DoesNotExist:
-        pass
-
-    if admin:
-        my_hood = Neighbourhood.objects.get(admin = admin)
-    elif occupant:
-        my_hood = occupant.hood
-    else:
-        raise Http404 
-
-    if 'searchbusiness' in request.GET and request.GET["searchbusiness"]:
-        search_term = request.GET.get("searchbusiness") 
-        search_businesses = Business.objects.filter(name__icontains = search_term, neighbourhood=my_hood)
-        
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message, "businesses":search_businesses})
-
-    else:
-        blank_message = "You haven't searched for any business."
-        return render(request, 'search.html',{"blank_message":blank_message})
