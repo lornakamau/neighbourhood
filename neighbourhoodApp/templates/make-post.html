@@ -5,16 +5,16 @@
 {{ block.super}}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock %}
+
 {% block content %}
 {{block.super}}
-{{ form.media }}
 
 <div class="container">
-    <h1>Update Neighbourhood</h1>
-    <form action="{%url 'update-hood'%}" method="post">
+    <h1>Post a message</h1>
+    <form action="{%url 'make-post'%}" method="post">
         {%csrf_token%}
-        {% bootstrap_form form %}
-        <input type="submit" class="btn btn-primary" value="Update">
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-info" value="Post">
     </form>
 </div>
 

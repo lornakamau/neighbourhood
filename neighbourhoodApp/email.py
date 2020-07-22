@@ -21,8 +21,8 @@ def send_signup_email_resident(name,username,password,admin,hood,receiver):
     sender = 'lornadeveloper@gmail.com'
 
     #passing in the context vairables
-    text_content = render_to_string('email/email-resident.txt',{"name": name, "username":username, "password":password, "admin":admin, "hood":hood})
-    html_content = render_to_string('email/email-resident.html',{"name": name, "username":username, "password":password, "admin":admin, "hood":hood})
+    text_content = render_to_string('email/email-occupant.txt',{"name": name, "username":username, "password":password, "admin":admin, "hood":hood})
+    html_content = render_to_string('email/email-occupant.html',{"name": name, "username":username, "password":password, "admin":admin, "hood":hood})
 
     msg = EmailMultiAlternatives(subject,text_content,sender,[receiver])
     msg.attach_alternative(html_content,'text/html')

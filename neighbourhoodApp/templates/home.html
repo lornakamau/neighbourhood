@@ -1,6 +1,21 @@
 {%extends 'base.html'%}
-{% load bootstrap3 %}
+{% load bootstrap3 %} 
 {% load static %}
+
 {% block content %}
-<h1>Magic</h1>
+{{block.super}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="jumbotron">
+                <h1><b>MyNeighbourhood</b></h1>
+                <a href="/accounts/login/">Login</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

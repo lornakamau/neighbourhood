@@ -1,44 +1,27 @@
-body {
-    padding-top: 10rem;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+.container{
+    padding-top: 5rem;
     align-items: center;
     display: flex;
     justify-content: center;
     margin: auto;
-}
-
-.box {
-    background: #444;
-    border-radius: 0.625rem;
-    display: flex;
     flex-direction: column;
-    width: 65%;
-    color: #fff;
-    padding: 2%;
     margin-bottom: 3%;
 }
-
-.title {
+form{
+    width: 55%;
+}
+h1 {
+    font-family: 'Fredoka One', cursive;
     text-transform: uppercase;
-    font-weight: 900;
     letter-spacing: .1rem;
     font-size: 3rem;
-    margin-bottom: 1%;
+    margin-bottom: 1rem;
 }
-
-hr {
-    width: 50%;
+h2{
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
 }
-
-.guide {
-    /* width: 50%; */
-    padding: 2% 15%;
-    font-size: 1.5rem;
-}
-
-form {
-    padding: 0 3%;
-}
-
 label {
     font-size: 1.5rem;
 }
@@ -46,27 +29,17 @@ label {
 .form-control {
     border-bottom: 1px solid #ccc;
     background-color: transparent;
-    color: #fff;
 }
 
-.form-control:focus {
-    border: 1px solid darkgoldenrod;
-    outline: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+.img-thumbnail, object{
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
 }
-
-.btn {
-    color: #444;
-    font-weight: 900;
+h5{
+    font-size: 1.7rem;
+    font-weight: 800;
 }
-.btn:hover{
-    background: darkgoldenrod;
-    
-}
-@media (max-width: 425px) {
-    .box{
-        width: 100% !important;
-        margin: 3%;
-    }
+.error .help-block{
+    color: red;
 }

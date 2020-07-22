@@ -17,18 +17,13 @@
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
     {% endblock %}
 </head>
-
 <body>
-    <div class="box">
-        <div class="text-center">
-            <div class="title">Create a profile to start using MyNeighbourhood</div>
-            <hr>
-            <div class="guide">Please create an admin profile</div>
-        </div>
-        <form action="{%url 'create_profile_admin'%}" method="post" enctype="multipart/form-data">
+    <div class="container">
+        <h1 class="text-center">Create a profile to start <br>using MyNeighbourhood</h1>
+        <form action="{%url 'create-admin'%}" method="post" enctype="multipart/form-data">
             {%csrf_token%}
             {% bootstrap_form form%}
-            <input type="submit" class="btn btn-dark " value="Create Admin Profile">
+            <input type="submit" class="btn btn-info " value="Create Admin Profile">
         </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

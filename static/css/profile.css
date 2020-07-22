@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+.container-fluid{
+    margin-bottom: 3%;
+}
+.navbar .container-fluid{
+    margin-bottom: 0;
+}
+.top ,.card, .posts{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    padding: 0 6%;
+}
+.card, .posts{
+    /* background-color: #f5f5f5; */
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 4px;
+    margin: 2%;
+    padding: 2%;
+}
+
+.top img, object{
+    width: 22rem;
+    height: 22rem;
+    margin: 2%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.name{
+    align-self: center;
+    justify-self: start;
+}
+span{
+    font-family: 'Fredoka One', cursive;
+    /* font-weight: 800; */
+    margin-right: 0.8rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+li{
+    margin-bottom: .8rem;
+}
+.map{
+    margin: 3% 6%;
+}
+.posts{
+    justify-content: start;
+    margin: 3% 6%;
+    align-content: flex-start;
+    background-color: #f5f5f5;
+}
+.posts span{
+    text-align: center;
+}
+blockquote{
+    background-color: #fff;
+    margin: 3% 2%;
+}

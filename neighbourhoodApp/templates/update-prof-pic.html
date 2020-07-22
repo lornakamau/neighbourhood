@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block styles %}
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+{% block content %}
+{{block.super}}
+
+<div class="container">
+    <h1>Change profile picture</h1>
+    <br>
+    <form action="/changeprofilephoto/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="img">Choose image</label>
+            <input type="file" id="img" name="img" accept="image/*" class="form-control">
+        </div>
+        <input type="submit" class="btn btn-info" value="Update">
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block styles %}
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+{% block content %}
+{{block.super}}
+
+<div class="container text-center">
+    <div class="row">
+        <h1>Occupants list | {{hood.name}}</h1>
+        {% for occupant in residents %}
+        <div class="col-md-4 text-left">
+            <div class="card list-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% if occupant.profile_photo %}
+                            <img class="img-thumbnail" src="{{occupant.profile_photo.url}}" alt="{{occupant.username}}">
+                            {% else %}
+                            <object
+                                data="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                                type="image/png">
+                                <img class="img-thumbnail" src="..." alt="{{occupant.username}}">
+                            </object>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-12">
+                            <h5>{{occupant.name | title}}</h5>
+                            {% if occupant.user.email %}
+                            <p><span class="fa fa-envelope"></span> {{occupant.user.email}}</p>
+                            {% endif %}
+                            <p class="text-danger"><a href="/delete-occupant/{{occupant.id}}"><i class="fas fa-trash-alt"></i>&nbsp;Remove occupant</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <p>You haven't added any residents yet.</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block styles %}
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+{{block.super}}
+
+<div class="container-fluid">
+    <div class="top">
+        {% if profile.profile_pic %}
+        <div><img class="rounded-circle" src="{{profile.profile_pic.url}}"></div>
+        {% else %}
+        <div><object data="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                type="image/png">
+                <img class="img-thumbnail" src="..." alt="...">
+            </object> </div>
+        {%endif%}
+        <div class="card">
+            <div class="name">
+                <span>NAME :</span>{{profile.user.username | title}}<br><br><span>ROLE :</span>Administrator<br><br><span>NEIGHBOURHOOD :</span>{{hood.name}}<br><br><span>OCCUPANTS
+                    COUNT :</span>{{hood.occupants}}</div>
+        </div>
+        <div class="card">
+            <span>ACCOUNT ACTIONS</span>
+            <ul>
+                <li><a href="{%url 'make-post'%}">Make Post</a></li>
+                <li><a href="{%url 'add-occupant'%}">Add occupant</a></li>
+                <li><a href="{%url 'occupants-list'%}">View Occupants</a></li>
+                <li><a href="{%url 'add-amenity'%}">Add amenity</a></li>
+                <li><a href="{%url 'update-hood'%}">Update hood</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#deleteHood">Delete hood</a></li>
+                <li><a href="/logout">Log out</a></li>
+            </ul>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteHood" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="bolden">{{hood.name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete your neighbourhood?<br>Please note this deletes your account too.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{%url 'delete-hood'%}"><button type="button" class="btn btn-danger">I'm
+                                    sure</button></a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map">
+        {{ map_page|safe }}
+    </div>
+    <div class="posts">
+        <span>STAY IN THE LOOP</span>
+        <div>
+            {% for post in posts %}
+            <blockquote>
+                <p>{{post.message}}</p>
+                <footer><cite title="Source Title">{{post.occupant}}, {{post.post_date}}</cite></footer>
+            </blockquote>
+            {% empty %}
+            <p>No posts yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

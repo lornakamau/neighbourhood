@@ -7,15 +7,16 @@
 {% endblock %}
 {% block content %}
 {{block.super}}
-{{ form.media }}
 
 <div class="container">
-    <h1>Update Neighbourhood</h1>
-    <form action="{%url 'update-hood'%}" method="post">
+    <h1>Add Occupant</h1>
+    <form action="{%url 'add-occupant'%}" method="post">
         {%csrf_token%}
-        {% bootstrap_form form %}
-        <input type="submit" class="btn btn-primary" value="Update">
+
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-primary" value="Add">
     </form>
+
 </div>
 
 {% endblock %}
